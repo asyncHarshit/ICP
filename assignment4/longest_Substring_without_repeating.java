@@ -5,25 +5,28 @@ import java.util.HashMap;
 public class longest_Substring_without_repeating {
     class Solution {
     public int lengthOfLongestSubstring(String s) {
-        HashMap<Character,Integer> map = new HashMap<>();
-        int windowEnd = 0;
-        int windowStart = 0;
-        int maxLen = Integer.MIN_VALUE;
-
-        while(windowEnd<s.length()){
-            char ch = s.charAt(windowEnd);
-            if(map.containsKey(ch) && windowStart<=map.get(ch)){
-                windowStart = map.get(ch)+1;
+        int start = 0;
+        int end = 0;
+        int ans = 0;
+        int freq[] = new int[256];
+        int n = s.length();
+        while(end < n){
+            char ch = s.charAt(end);
+            freq[ch]++;
+            end++;
+            while(start < end && freq[ch] > 1){
+                char c2 = s.charAt(start);
+                freq[c2]--;
+                start++;
             }
-            map.put(ch,windowEnd);
-            maxLen = Math.max(maxLen,windowEnd-windowStart+1);
-            windowEnd++;
+
+            ans = Math.max(ans , end - start);
+
         }
-
-        return (maxLen==Integer.MIN_VALUE)?0:maxLen;
-
+        return ans;
         
     }
+ }
 }
-    
-}
+
+
