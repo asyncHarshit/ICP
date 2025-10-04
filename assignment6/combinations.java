@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.ArrayList;
+
 public class combinations {
     class Solution {
     public void helper(List<List<Integer>> ans,List<Integer> list,int n,int k,int start){
